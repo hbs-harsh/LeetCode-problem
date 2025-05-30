@@ -1,15 +1,20 @@
-// Last updated: 5/21/2025, 10:12:44 AM
+// Last updated: 5/30/2025, 11:48:31 PM
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
         int n=prices.size();
+        int ans=0;
         int mini=prices[0];
-        int profit=0;
+
         for(int i=1;i<n;i++){
+
             int cost=prices[i]-mini;
-            profit=max(profit,cost);
+            ans = max(ans,cost);
             mini=min(prices[i],mini);
         }
-        return profit;
+        return ans;
+
+
+
     }
 };
