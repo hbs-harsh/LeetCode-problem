@@ -1,40 +1,21 @@
-// Last updated: 6/2/2025, 12:54:58 AM
+// Last updated: 6/2/2025, 1:55:22 AM
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
-        int n = nums.size();
-        vector<int> dp(n, 1), hash(n);
-        int maxi = 1;
-        int last_index = 0;
+        int n=nums.size();
+        vector<int>temp;
+        temp.push_back(nums[0]);
+        int len=1;
 
-        for (int i = 0; i < n; i++) {
-            hash[i] = i;
-            for (int prev = 0; prev < i; prev++) {
-                if (nums[prev] < nums[i] && dp[prev] + 1 > dp[i]) {
-                    dp[i] = dp[prev] + 1;
-                    hash[i] = prev;
-                }
-            }
-
-            if (dp[i] > maxi) {
-                maxi = dp[i];
-                last_index = i;
-            }
+        for(int i=1;i<n;i++){
+            if(nums[i]>temp.back()){
+                 temp.push_back(nums[i]);
+            len++;
+            }else {
+            int ind = lower_bound(temp.begin(), temp.end(), nums[i]) - temp.begin();
+            temp[ind] = nums[i];
         }
-
-        // Reconstruct the LIS
-        vector<int> temp;
-        temp.push_back(nums[last_index]);
-        while (hash[last_index] != last_index) {
-            last_index = hash[last_index];
-            temp.push_back(nums[last_index]);
         }
-
-        reverse(temp.begin(), temp.end());
-
-        for (auto it : temp) cout << it << " ";
-        cout << endl;
-
-        return maxi;
+        return len;
     }
 };
