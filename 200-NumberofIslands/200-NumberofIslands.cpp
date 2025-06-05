@@ -1,31 +1,22 @@
-// Last updated: 6/6/2025, 2:31:25 AM
+// Last updated: 6/6/2025, 2:33:16 AM
 class Solution {
 private:
-    void bfs(int row, int col, vector<vector<int>>& vis, vector<vector<char>>& grid) {
+    void dfs(int row, int col, vector<vector<int>>& vis, vector<vector<char>>& grid) {
         int n = grid.size();
         int m = grid[0].size();
         vis[row][col] = 1;
-        queue<pair<int, int>> q;
-        q.push({row, col});
 
-        // Directions: up, down, left, right
+        // 4 directions: up, down, left, right
         int drow[] = {-1, 1, 0, 0};
         int dcol[] = {0, 0, -1, 1};
 
-        while (!q.empty()) {
-            int crow = q.front().first;
-            int ccol = q.front().second;
-            q.pop();
+        for (int i = 0; i < 4; i++) {
+            int nrow = row + drow[i];
+            int ncol = col + dcol[i];
 
-            for (int i = 0; i < 4; i++) {
-                int nrow = crow + drow[i];
-                int ncol = ccol + dcol[i];
-
-                if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m &&
-                    grid[nrow][ncol] == '1' && !vis[nrow][ncol]) {
-                    vis[nrow][ncol] = 1;
-                    q.push({nrow, ncol});
-                }
+            if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m &&
+                grid[nrow][ncol] == '1' && !vis[nrow][ncol]) {
+                dfs(nrow, ncol, vis, grid);
             }
         }
     }
@@ -41,7 +32,7 @@ public:
             for (int col = 0; col < m; col++) {
                 if (!vis[row][col] && grid[row][col] == '1') {
                     cnt++;
-                    bfs(row, col, vis, grid);
+                    dfs(row, col, vis, grid);
                 }
             }
         }
