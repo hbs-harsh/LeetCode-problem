@@ -1,20 +1,12 @@
-// Last updated: 6/16/2025, 4:38:33 PM
+// Last updated: 6/16/2025, 4:40:27 PM
 class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
-        int n=nums.size();
-
-        unordered_map<int,int>mp;
-
-        for(auto it : nums){
-            mp[it]++;
+        
+        int ans=0;
+        for(int num :nums){
+            ans ^=num;
         }
-
-        for(auto it: mp){
-            if(it.second==1){
-                return it.first;
-            }
-        }
-        return -1;
+        return ans;
     }
 };
