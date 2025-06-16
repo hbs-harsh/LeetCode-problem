@@ -1,24 +1,25 @@
-// Last updated: 6/16/2025, 2:34:51 PM
+// Last updated: 6/16/2025, 2:38:57 PM
 class Solution {
 public:
-    int search(vector<int>& nums, int target) {
+    int maximumCount(vector<int>& nums) {
+        
         int n=nums.size();
-        int low=0;
-        int high=n-1;
 
-        while(low<=high){
-            int mid=high+(low-high)/2;
-
-            if(nums[mid]==target){
-                return mid;
+        int pos=0;
+        int neg=0;
+        int ans=0;
+        for(int i=0;i<n;i++){
+            if(nums[i]>0){
+                pos++;
             }
-            else if(target<nums[mid]){
-                high=mid-1;
+            else if(nums[i]<0){
+                neg++;
             }
-            else{
-                low=mid+1;
-            }
+           
+             
+            
         }
-        return -1;
+           ans=max(pos,neg);
+        return ans;
     }
 };
