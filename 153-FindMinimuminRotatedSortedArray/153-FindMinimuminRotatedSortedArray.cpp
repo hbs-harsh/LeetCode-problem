@@ -1,16 +1,17 @@
-// Last updated: 6/16/2025, 3:42:55 PM
+// Last updated: 6/18/2025, 2:43:57 PM
 class Solution {
 public:
     int findMin(vector<int>& nums) {
         int n=nums.size();
 
-        int ans=INT_MAX;
         int low=0;
         int high=n-1;
 
-       
+        int ans=INT_MAX;
+
         while(low<=high){
             int mid=low+(high-low)/2;
+
             if(nums[low]<=nums[mid]){
                 ans=min(ans,nums[low]);
                 low=mid+1;
@@ -20,7 +21,6 @@ public:
                 high=mid-1;
             }
         }
-return ans;
-
+        return ans;
     }
 };
