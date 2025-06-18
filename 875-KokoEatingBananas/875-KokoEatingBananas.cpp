@@ -1,38 +1,32 @@
-// Last updated: 6/18/2025, 4:34:44 PM
+// Last updated: 6/18/2025, 4:36:10 PM
 class Solution {
 public:
-int findMax(vector<int>& arr){
-     int n=arr.size();
-        int maxi=INT_MAX;
-
-        for(int i=0;i<n;i++){
-            maxi=max(maxi,arr[i]);
+   bool canEatAllInTime(int hourly, vector<int>& piles, int h) {
+        long long hours = 0;
+        for (int val : piles) {
+            hours += (val + hourly - 1) / hourly;
+            if (hours > h) return false;
         }
-        return maxi;
-}
-int calTotalHour(vector<int> & nums,int hourly){
-    int n=nums.size();
-    int totalH=0;
-    for(int i=0;i<n;i++){
-        totalH +=ceil((double)nums[i]/(double)hourly);
+        return hours <= h;
     }
-    return totalH;
-}
     int minEatingSpeed(vector<int>& piles, int h) {
-        int m=piles.size();
-       int low=1;
-       int high=findMax(piles);
-       while(low<=high){
-        int mid= low +(high-low)/2;
-        int totalH=calTotalHour(piles,mid);
+        
+        int low=1;
+        int high=*max_element(piles.begin(),piles.end());
+        int ans=0;
+        while(low<=high){
 
-        if(totalH<=h){
-            high=mid-1;
+            int mid=low+(high-low)/2;
+
+            if(canEatAllInTime(mid,piles,h)){
+                ans=mid;
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
         }
-        else {
-            low=mid+1;
-        }
-       }
-       return low;
+
+        return ans;
     }
 };
