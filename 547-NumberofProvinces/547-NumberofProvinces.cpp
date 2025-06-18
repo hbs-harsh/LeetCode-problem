@@ -1,4 +1,4 @@
-// Last updated: 6/5/2025, 12:56:14 AM
+// Last updated: 6/18/2025, 11:51:20 PM
 class Solution {
 private:
     void dfs(int node, vector<vector<int>>& isConnected, vector<int>& vis) {
