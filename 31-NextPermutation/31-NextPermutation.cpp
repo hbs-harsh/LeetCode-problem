@@ -1,28 +1,30 @@
-// Last updated: 5/4/2025, 10:14:05 PM
+// Last updated: 6/19/2025, 4:25:31 PM
 class Solution {
 public:
-    void nextPermutation(vector<int>& nums) {
-        int ind=-1;
-        int n=nums.size();
+  void nextPermutation(vector<int>& nums) {
+    int n = nums.size();
+    int i = n - 2;
 
-        for(int i=n-2;i>=0;i--){
-            if(nums[i]<nums[i+1]){
-                ind=i;
-                break;
-            }
-        }
-        if(ind ==-1){
-            reverse(nums.begin(),nums.end());
-            return;
-        }
-        for(int i=n-1;i>ind;i--){
-            if(nums[i]>nums[ind]){
-                swap(nums[i],nums[ind]);
-                break;
-            }
-        }
-
-        reverse(nums.begin()+ind+1,nums.end());
-        
+    // Step 1: Find the first decreasing element from the end
+    while (i >= 0 && nums[i] >= nums[i + 1]) {
+        i--;
     }
+
+    if (i >= 0) {
+        // Step 2: Find the next larger element from the end
+        int j = n - 1;
+        while (j >= 0 && nums[j] <= nums[i]) {
+            j--;
+        }
+
+        // Step 3: Swap
+        swap(nums[i], nums[j]);
+    }
+
+    // Step 4: Reverse the remaining part
+    reverse(nums.begin() + i + 1, nums.end());
+}
+
+        
+
 };
