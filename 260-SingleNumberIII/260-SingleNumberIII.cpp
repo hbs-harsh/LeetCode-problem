@@ -1,4 +1,4 @@
-// Last updated: 6/27/2025, 4:20:05 PM
+// Last updated: 6/27/2025, 4:37:20 PM
 class Solution {
 public:
     vector<int> singleNumber(vector<int>& nums) {
@@ -7,13 +7,19 @@ public:
         for(int num:nums){
             xorAll = xorAll^num;
         }
-        unsigned int diffbits = xorAll & (~xorAll + 1u); 
+      int val=xorAll;
+
+      int i=0;
+      while((val&1)==0){
+        val=val>>1;
+        i++;
+      }
 
         int grpA=0;
         int grpB=0;
 
        for (int num : nums) {
-            if ((num & diffbits) == 0)
+            if ((num & (1<<i)) == 0)
                 grpA ^= num;
             else
                 grpB ^= num;
