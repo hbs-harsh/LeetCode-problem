@@ -1,19 +1,25 @@
-// Last updated: 6/27/2025, 3:34:50 PM
+// Last updated: 6/27/2025, 4:20:05 PM
 class Solution {
 public:
     vector<int> singleNumber(vector<int>& nums) {
-        vector<int>ans;
-
-        unordered_map<int,int>mp;
-
+        
+        int xorAll=0;
         for(int num:nums){
-            mp[num]++;
+            xorAll = xorAll^num;
         }
-        for(auto&it:mp){
-            if(it.second==1){
-                ans.push_back(it.first);
-            }
+        unsigned int diffbits = xorAll & (~xorAll + 1u); 
+
+        int grpA=0;
+        int grpB=0;
+
+       for (int num : nums) {
+            if ((num & diffbits) == 0)
+                grpA ^= num;
+            else
+                grpB ^= num;
         }
-        return ans;
+        return {grpA,grpB};
+
+
     }
 };
