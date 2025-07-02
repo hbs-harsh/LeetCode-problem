@@ -1,4 +1,4 @@
-// Last updated: 7/2/2025, 3:36:00 PM
+// Last updated: 7/2/2025, 3:41:09 PM
 class Solution {
 public:
 int  MaxRequest=0;
@@ -28,10 +28,11 @@ int  MaxRequest=0;
 
         findMaxRequest(ind+1,cnt+1,building,requests);
 
+        //backtrack process
         building[from]++;
         building[to]--;
 
         //notproceess
-        findMaxRequest(ind+1,cnt,building,requests);
+        findMaxRequest(ind+1,cnt,building,requests);    //t.c=o(2^m*n) ,sc-o(n)
     }
 };
