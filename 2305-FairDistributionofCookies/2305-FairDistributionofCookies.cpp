@@ -1,4 +1,4 @@
-// Last updated: 7/2/2025, 4:30:13 PM
+// Last updated: 7/2/2025, 4:33:10 PM
 class Solution {
 public:
  int ans=INT_MAX;
@@ -31,6 +31,6 @@ void find(int ind,vector<int>&cookies,vector<int>&child,int k){
         vector<int>child(k);
 
        find(0,cookies,child,k);
-       return ans;
+       return ans;     //t.c-O(k^m*k) ands.c=O(m)  where m is the cookies length and k is children
     }
 };
