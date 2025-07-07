@@ -1,4 +1,4 @@
-// Last updated: 7/7/2025, 3:16:00 PM
+// Last updated: 7/7/2025, 3:16:50 PM
 class Solution {
 public:
     //  int fun(int i,int j,string &s1,string &s2,vector<vector<int>>&dp){
@@ -18,17 +18,9 @@ public:
         int m=text1.size();
         int n=text2.size();
         vector<vector<int>>dp(m+1,(vector<int>(n+1,0)));
-        return LCS(m,n,text1,text2,dp);
-    }
-
-
-    //tablu
-    int LCS(int m,int n,string &s1,string &s2,vector<vector<int>>&dp){
-
-
         for(int i=1;i<=m;i++){
             for(int j=1;j<=n;j++){
-                if(s1[i-1]==s2[j-1]){
+                if(text1[i-1]==text2[j-1]){
                     dp[i][j]=1+dp[i-1][j-1];
                 }
                 else{
@@ -38,4 +30,8 @@ public:
         }
         return dp[m][n];
     }
+
+
+    //tablu
+    
 };
