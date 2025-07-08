@@ -1,24 +1,30 @@
-// Last updated: 7/8/2025, 3:23:35 PM
+// Last updated: 7/8/2025, 3:41:10 PM
 class Solution {
 public:
-    int LCS(int i, int j, string &s1, string &s2, vector<vector<int>> &dp) {
-        if (i == s1.size() || j == s2.size()) return 0;
-
-        if (dp[i][j] != -1) return dp[i][j];
-
-        if (s1[i] == s2[j])
-            return dp[i][j] = 1 + LCS(i + 1, j + 1, s1, s2, dp);
-        else
-            return dp[i][j] = max(LCS(i + 1, j, s1, s2, dp), LCS(i, j + 1, s1, s2, dp));
-    }
 
     int longestPalindromeSubseq(string s) {
-        string rev = s;
-        reverse(rev.begin(), rev.end());
-
-        int n = s.size();
-        vector<vector<int>> dp(n, vector<int>(n, -1));
-
-        return LCS(0, 0, s, rev, dp);
+        string s1=s;
+       reverse(s1.begin(),s1.end());
+       int m=s.size();
+       int n=s1.size();
+     vector<vector<int>>dp(m+1,vector<int>(n+1,-1));
+      
+      for(int i=0;i<=m;i++){
+        dp[i][0]=0;
+      }
+      for(int i=0;i<=n;i++){
+        dp[0][i]=0;
+      }
+      for(int i=1;i<=m;i++){
+        for(int j=1;j<=n;j++){
+            if(s[i-1]==s1[j-1]){
+                dp[i][j]=1+dp[i-1][j-1];
+            }
+            else{
+               dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+            }
+        }
+      }
+      return dp[m][n];
     }
 };
