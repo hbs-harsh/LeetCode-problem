@@ -1,4 +1,4 @@
-// Last updated: 7/9/2025, 2:43:34 PM
+// Last updated: 7/9/2025, 2:52:08 PM
 class Solution {
 public:
 int fun(int i,int j,string&s1,string &s2,vector<vector<int>>&dp){
@@ -25,7 +25,7 @@ int fun(int i,int j,string&s1,string &s2,vector<vector<int>>&dp){
         
         int m=word1.size();
         int n=word2.size();
-        vector<vector<int>>dp(m+1,vector<int>(n,-1));
+        vector<vector<int>>dp(m,vector<int>(n,-1));
         return fun(0,0,word1,word2,dp);
     }
 };
