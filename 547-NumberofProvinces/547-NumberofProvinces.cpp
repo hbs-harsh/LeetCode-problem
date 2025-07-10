@@ -1,40 +1,26 @@
-// Last updated: 6/22/2025, 1:07:40 AM
+// Last updated: 7/11/2025, 12:08:00 AM
 class Solution {
-private:
-    void dfs(int node, vector<int> adjList[], vector<int>& vis) {
-        vis[node] = 1;
-        for (auto it : adjList[node]) {
-            if (!vis[it]) {
-                dfs(it, adjList, vis);
-            }
-        }
-    }
-
 public:
+void dfs(int node,vector<int>&vis,vector<vector<int>>& isConnected){
+    vis[node]=1;
+     for (int j = 0; j < isConnected.size(); j++) {
+            if (isConnected[node][j] == 1 && !vis[j]) {
+                dfs(j, vis, isConnected);
+            }
+        }
+}
     int findCircleNum(vector<vector<int>>& isConnected) {
-        int V = isConnected.size();
-        vector<int> adjList[V];
+        int provinceCnt=0;
 
-        // Convert adjacency matrix to adjacency list
-        for (int i = 0; i < V; i++) {
-            for (int j = 0; j < V; j++) {
-                if (isConnected[i][j] == 1 && i != j) {
-                    adjList[i].push_back(j);
-                    adjList[j].push_back(i);
-                }
+        int n=isConnected.size();
+        vector<int>vis(n,0);
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                dfs(i,vis,isConnected);
+                  provinceCnt++;
             }
+          
         }
-
-        vector<int> vis(V, 0);
-        int cnt = 0;
-
-        for (int i = 0; i < V; i++) {
-            if (!vis[i]) {
-                cnt++;
-                dfs(i, adjList, vis);
-            }
-        }
-
-        return cnt;
+        return provinceCnt;
     }
 };
