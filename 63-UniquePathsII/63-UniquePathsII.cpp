@@ -1,12 +1,12 @@
-// Last updated: 7/14/2025, 3:14:37 PM
+// Last updated: 7/14/2025, 3:21:20 PM
 class Solution {
 public:
-int findPath(int row,int col,int m,int n,vector<vector<int>>&grid,
+int findPath(int row,int col,vector<vector<int>>&grid,
 vector<vector<int>>&dp){
-        if(row==m|| col==n ||grid[row][col]==1){
+        if(row<0|| col<0 ||grid[row][col]==1){
             return 0;
         }
-        if(row==m-1 && col==n-1){
+        if(row==0 && col==0){
             return 1;
         }
 
@@ -14,14 +14,14 @@ vector<vector<int>>&dp){
             return dp[row][col];
         }
      
-        int right=findPath(row,col+1,m,n,grid,dp);
+        int left=findPath(row,col-1,grid,dp);
 
-        int down=findPath(row+1,col,m,n,grid,dp);
+        int up=findPath(row-1,col,grid,dp);
 
        
         
 
-        return dp[row][col]=right+down;
+        return dp[row][col]=left+up;
     }
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
         int m=obstacleGrid.size();
@@ -30,6 +30,6 @@ vector<vector<int>>&dp){
             return 0;
         }
         vector<vector<int>>dp(m,vector<int>(n,-1));
-        return findPath(0,0,m,n,obstacleGrid,dp);
+        return findPath(m-1,n-1,obstacleGrid,dp);
     }
 };
