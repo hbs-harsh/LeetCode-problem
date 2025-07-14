@@ -1,4 +1,4 @@
-// Last updated: 7/14/2025, 4:10:54 PM
+// Last updated: 7/14/2025, 4:19:02 PM
 class Solution {
 public:
 int find(int row,int col,int m ,int n,vector<vector<int>>& grid,vector<vector<int>>&dp){
@@ -17,8 +17,25 @@ int find(int row,int col,int m ,int n,vector<vector<int>>& grid,vector<vector<in
     int minPathSum(vector<vector<int>>& grid) {
         int m=grid.size();
         int n=grid[0].size();
-        vector<vector<int>>dp(m,vector<int>(n,-1));
+        vector<vector<int>>dp(m,vector<int>(n,0));
 
-        return find(0,0,m,n,grid,dp);
+        dp[0][0]=grid[0][0];
+
+        for(int i=1;i<m;i++){
+            dp[i][0]=grid[i][0]+dp[i-1][0];
+        }
+        for(int j=1;j<n;j++){
+            dp[0][j]=grid[0][j]+dp[0][j-1];
+        }
+        for(int i=1;i<m;i++){
+            for(int j=1;j<n;j++){
+
+                int way1=dp[i-1][j];
+                int way2=dp[i][j-1];
+
+                dp[i][j]=grid[i][j]+min(way1,way2);
+            }
+        }
+        return dp[m-1][n-1];
     }
 };
