@@ -1,4 +1,4 @@
-// Last updated: 7/15/2025, 4:36:32 PM
+// Last updated: 7/15/2025, 4:40:26 PM
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -16,11 +16,10 @@ public:
         if(root == nullptr) return nullptr;
 
 
-     TreeNode* left = invertTree(root->left);
-      TreeNode* right =invertTree(root->right);
-
-      root->left=right;
-      root->right=left;
+     TreeNode* leftInverted = invertTree(root->left);
+      TreeNode* rightInverted =invertTree(root->right);
+      root->left=rightInverted;
+      root->right=leftInverted;
 
       return root;
     }
