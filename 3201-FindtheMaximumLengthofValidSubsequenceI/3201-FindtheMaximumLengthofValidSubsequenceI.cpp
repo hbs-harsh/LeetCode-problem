@@ -1,4 +1,4 @@
-// Last updated: 7/16/2025, 10:53:35 PM
+// Last updated: 7/16/2025, 10:55:18 PM
 class Solution {
 public:
     int maximumLength(vector<int>& nums) {
@@ -16,7 +16,7 @@ public:
             }
         }
         int parity=nums[0]%2;
-        alternating +=1;
+        alternating +=1; //parity length
         for(int i=1;i<n;i++){
             int curParity=nums[i]%2;
             if(curParity!=parity){
@@ -24,6 +24,6 @@ public:
                 parity=curParity;
             }
         }
-        return max({evencnt++,oddcnt++,alternating});
+        return max({evencnt,oddcnt,alternating});
     }
 };
