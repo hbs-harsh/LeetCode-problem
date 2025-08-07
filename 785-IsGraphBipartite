@@ -1,29 +1,20 @@
-// Last updated: 8/7/2025, 11:19:51 PM
+// Last updated: 8/7/2025, 11:45:10 PM
 class Solution {
     private:
-    bool check(int start,int V,vector<vector<int>>& graph,vector<int>&color){
- 
-
-        queue<int>q;
-        q.push(start);
+    bool check(int node,int col,vector<vector<int>>& graph,vector<int>&color){
         
-        color[start]=0;
-
-        while(!q.empty()){
-            int node=q.front();
-            q.pop();
-
-            for(auto nbr:graph[node]){
+        color[node]=col;
+        for(auto nbr:graph[node]){
 
                 if(color[nbr]==-1){
-                    color[nbr]=!color[node];
-                    q.push(nbr);
+                   
+                 if( check(nbr,!col,graph,color)==false) return false;
                 }
                 else if(color[nbr]==color[node]){
                     return false;
                 }
             }
-        }
+        
         return true;
     }
 public:
@@ -33,7 +24,7 @@ public:
 
        for(int i=0;i<V;i++){
         if(color[i] == -1){
-        if(check(i,V,graph,color)==false){
+        if(check(i,0,graph,color)==false){
             return false;
         }
        }
