@@ -1,30 +1,43 @@
-// Last updated: 7/24/2025, 2:49:28 PM
+// Last updated: 8/7/2025, 11:19:51 PM
 class Solution {
-public:
-bool dfs(int node,int color,vector<int>&colors,vector<vector<int>>&graph){
-    colors[node]=color;
+    private:
+    bool check(int start,int V,vector<vector<int>>& graph,vector<int>&color){
+ 
 
-    for(auto nbr: graph[node]){
-        if(colors[nbr]==-1){
-           if( dfs(nbr,1-color,colors,graph)==false) return false;
-        }else{
-            if(colors[node]==colors[nbr]){
-                return false;
-            }
-        }
-    }
-    return true;
-}
-    bool isBipartite(vector<vector<int>>& graph) {
-        int V=graph.size();
+        queue<int>q;
+        q.push(start);
+        
+        color[start]=0;
 
-        vector<int>colors(V,-1);
+        while(!q.empty()){
+            int node=q.front();
+            q.pop();
 
-        for(int i=0;i<colors.size();i++){
-            if(colors[i]==-1){
-              if( dfs(i,0,colors,graph)==false) return false;
+            for(auto nbr:graph[node]){
+
+                if(color[nbr]==-1){
+                    color[nbr]=!color[node];
+                    q.push(nbr);
+                }
+                else if(color[nbr]==color[node]){
+                    return false;
+                }
             }
         }
         return true;
+    }
+public:
+    bool isBipartite(vector<vector<int>>& graph) {
+         int V=graph.size();
+       vector<int>color(V,-1);
+
+       for(int i=0;i<V;i++){
+        if(color[i] == -1){
+        if(check(i,V,graph,color)==false){
+            return false;
+        }
+       }
+       }
+       return true;
     }
 };
