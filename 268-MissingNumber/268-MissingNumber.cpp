@@ -1,17 +1,22 @@
-// Last updated: 9/21/2025, 10:43:37 PM
+// Last updated: 9/21/2025, 10:53:31 PM
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
         int n=nums.size();
         
         // sort(nums.begin(),nums.end());
-       int total= n*(n+1)/2;
+       int xor1=0;
+       int xor2=0;
 
-       int sum=0;
+       for(int i=0;i<=n;i++){
+        xor1^=i;
 
-       for(int x: nums){
-        sum += x;
        }
-       return total-sum;
+
+       for(int x:nums){
+        xor2 ^= x;
+       }
+       return xor1^xor2;
     }
+
 };
