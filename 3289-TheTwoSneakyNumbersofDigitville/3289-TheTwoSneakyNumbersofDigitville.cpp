@@ -1,16 +1,19 @@
-// Last updated: 11/1/2025, 1:24:36 AM
+// Last updated: 11/1/2025, 1:31:37 AM
 class Solution {
 public:
     vector<int> getSneakyNumbers(vector<int>& nums) {
         
-    
-        vector<int> ans{};
-        for(int i=0;i<nums.size();i++){
-            for(int j=i+1;j<nums.size();j++){
-                if(nums[i]==nums[j]){
-                ans.push_back(nums[i]);
-            }
-        }}
-        return ans;
+      unordered_map<int, int> mp;
+    vector<int> result;
+
+    for (int num : nums) {
+        mp[num]++;
+        if (mp[num] == 2) {     
+            result.push_back(num);
+        }
+    }
+
+    return result; 
+
     }
 };
